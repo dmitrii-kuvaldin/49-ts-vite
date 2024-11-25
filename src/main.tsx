@@ -32,6 +32,7 @@ import Lesson12 from "./lessons/lesson12/Lesson12";
 import Lesson13 from "./lessons/lesson13/Lesson13";
 import Lesson14 from "./lessons/lesson14/Lesson14";
 import StorePage from "./components/storePage/StorePage";
+import LoginForm from "./components/loginForm/LoginForm";
 
 createRoot(document.getElementById('root')!).render(
   <CartProvider>
@@ -51,6 +52,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="cart" element={<Cart />} />
           {/* импорт галереи продуктов */}
           <Route path="store" element={<Store />} />
+          {/* путь до login компонента */}
+          <Route path="login" element={<LoginForm />} />
           {/* импорт страницы с данными об одном продукте */}
           <Route path="store/:id" element={<StorePage />} />
           <Route path="lesson-1" element={<Lesson01 />} />
