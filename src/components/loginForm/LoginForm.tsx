@@ -1,9 +1,12 @@
 import { useFormik } from "formik";
+import { useAuth } from "../../context/authContext";
 import MyButton from "../myButton/MyButton";
 import MyInput from "../myInput/MyInput";
 import "./loginForm.css";
 
 function LoginForm() {
+
+  const { setUser } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +25,7 @@ function LoginForm() {
         })
       })
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => setUser(data));
     }
   });
 
