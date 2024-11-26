@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface IUser {
-  accessToken: string;
+  accessToken?: string;
   email: string;
   firstName: string;
   gender: string;
@@ -9,10 +9,10 @@ interface IUser {
   image: string;
   lastName: string;
   refreshToken: string;
-  username: string;
+  username?: string;
 }
 
-const initialUser: IUser = {
+export const initialUser: IUser = {
   accessToken: "",
   email: "",
   firstName: "",

@@ -15,6 +15,7 @@ import './index.css';
 // import Homework03 from "./homeworks/homework03/Homework03";
 // import Homework04 from "./homeworks/homework04/Homework04";
 import LoginForm from "./components/loginForm/LoginForm";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 import StorePage from "./components/storePage/StorePage";
 import { AuthProvider } from "./context/authContext";
 import Homework12 from "./homeworks/homework12/Homework12";
@@ -46,7 +47,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Layout />}>
             {/* пути ниже будут приходить на место Outlet в Layout */}
             <Route path="/" element={<HomePage />} />
-            <Route path="fetch-dog" element={<FetchDog />} />
+            <Route path="fetch-dog" element={<ProtectedRoute outlet={<FetchDog />} />} />
             <Route path="hero-gallery" element={<HeroGallery data={heroes} />} />
             <Route path="gender-form" element={<GenderForm />} />
             <Route path="products" element={<Products />} />
