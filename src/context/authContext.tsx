@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 
-// типизация данных по юзеру
 interface IUser {
   accessToken: string;
   email: string;
@@ -13,13 +12,6 @@ interface IUser {
   username: string;
 }
 
-// типизация контекста - данные из state по юзеру
-interface IAuthContextType {
-  user: IUser;
-  setUser: React.Dispatch<React.SetStateAction<IUser>>;
-}
-
-// начальное значение для state
 const initialUser: IUser = {
   accessToken: "",
   email: "",
@@ -32,24 +24,39 @@ const initialUser: IUser = {
   username: ""
 };
 
+interface IAuthContextType {
+  user: IUser;
+  setUser: React.Dispatch<React.SetStateAction<IUser>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+// ! создаем контекст с помощью createContext()
 export const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
-// обертка над компонентами созданная с помощью контекста
+
+// ! создаем компонент-обертку с помощью созданного контекста
+// наполняем контекст данными и передаем их в value
 export const AuthProvider = ({ children }: { children: React.ReactNode; }) => {
-  // 1. переменная содержащая данные по пользователю
-  // 2.  функция для изменения значений этой переменной
   const [user, setUser] = useState<IUser>(initialUser);
-  // ! этот стейт доступен для всех компонентов
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {/* за место children придут обернутые в provider компоненты */}
+    <AuthContext.Provider value={{ user, setUser, setIsLoading, isLoading }}>
+      {/* <h1>Привет из контекста</h1> */}
       {children}
     </AuthContext.Provider>
   );
 }
 
+
+
+// ! создаем хук для работы с выбранным контекстом
+// внутри он использует useContext() для того чтобы забрать данные
+// делает проверку на undefined
 export const useAuth = () => {
   const context = useContext(AuthContext)
+  console.log('auth context', context)
   if (!context) {
     throw new Error('no such context! 😵')
   }

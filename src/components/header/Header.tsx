@@ -9,6 +9,7 @@ import { useAuth } from "../../context/authContext";
 export default function Header() {
   // ! мы получем данные из контекста обращаясь к нему и получаем данные через деструктуризацию
   const { cart } = useCart();
+  // ! получаем данные из контекста
   const { user } = useAuth();
 
   const calculateCartPrice = () => {
@@ -26,6 +27,7 @@ export default function Header() {
       <NavLink className={({ isActive }) => (isActive ? styles.linkActive : '')} to={"store"}>Store</NavLink>
       <NavLink className={({ isActive }) => (isActive ? styles.linkActive : '')} to={"login"}>Login</NavLink>
       <span style={{color: 'black'}}>Сумма в корзине: {calculateCartPrice().toFixed(2)}€</span>
+      {/* используем данные из контекста */}
       <span>{user.email}</span>
     </header >
   );

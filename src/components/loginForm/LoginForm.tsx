@@ -5,7 +5,7 @@ import MyInput from "../myInput/MyInput";
 import "./loginForm.css";
 
 function LoginForm() {
-
+  // ! забираем данные из контекста
   const { setUser } = useAuth();
 
   const formik = useFormik({
@@ -25,6 +25,7 @@ function LoginForm() {
         })
       })
         .then(res => res.json())
+        // ! передаем данные в контекст
         .then(data => setUser(data));
     }
   });
